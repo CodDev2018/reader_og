@@ -1,8 +1,12 @@
-const PageRepository = {
-    pageList: [],
+class PageRepository  {
+    constructor () {
+        this.pageList = []
+    }
+
     exists(url) {
         return this.pageList.some(page => page.url === url)
-    },
+    }
+
     save(page) {
         console.log(page);
         if (this.exists(page.url)) {
@@ -10,10 +14,15 @@ const PageRepository = {
         }
 
         this.pageList.push(page)
-        console.log(this.pageList.length + ' páginas lidas.')
         return true
+    }
+
+    saveAll(pages) {
+        pages.forEach(page => {
+            this.save(page)
+        });
     }
 }
 
 
-module.exports = PageRepository
+module.exports = new PageRepository()
